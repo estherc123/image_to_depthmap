@@ -3,7 +3,7 @@ import torch.nn as nn
 from torch.nn import init
 import functools
 from torch.optim import lr_scheduler
-
+import loralib as lora
 
 ###############################################################################
 # Helper Functions
@@ -473,7 +473,7 @@ class UnetSkipConnectionBlock(nn.Module):
     """
 
     def __init__(self, outer_nc, inner_nc, input_nc=None,
-                 submodule=None, outermost=False, innermost=False, norm_layer=nn.BatchNorm2d, use_dropout=False):
+                 submodule=None, outermost=False, innermost=False, norm_layer=nn.BatchNorm2d, use_dropout=False, with_lora=False):
         """Construct a Unet submodule with skip connections.
 
         Parameters:
@@ -494,8 +494,12 @@ class UnetSkipConnectionBlock(nn.Module):
             use_bias = norm_layer == nn.InstanceNorm2d
         if input_nc is None:
             input_nc = outer_nc
-        downconv = nn.Conv2d(input_nc, inner_nc, kernel_size=4,
-                             stride=2, padding=1, bias=use_bias)
+        if with_lora:
+            downconv = lora.Conv2d(input_nc, inner_nc, kernel_size=4,
+                                   stride=2, padding=1, bias=use_bias, r=16) # TODO: check lora.Conv2d, update r based on values
+        else:
+            downconv = nn.Conv2d(input_nc, inner_nc, kernel_size=4,
+                                 stride=2, padding=1, bias=use_bias)
         downrelu = nn.LeakyReLU(0.2, True)
         downnorm = norm_layer(inner_nc)
         uprelu = nn.ReLU(True)
