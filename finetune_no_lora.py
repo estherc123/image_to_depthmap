@@ -15,9 +15,6 @@ if __name__ == '__main__':
     model = create_model(opt)      # create a model
     model.setup(opt)               # regular setup
 
-    # Check if a pre-trained model path is provided and load it
-    if opt.pretrained_model_path:
-        model.load_networks(opt.pretrained_model_path)  # ensure this method exists in your model class
 
     visualizer = Visualizer(opt)   # create a visualizer
     total_iters = 0                # total training iterations
