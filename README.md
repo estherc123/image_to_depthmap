@@ -12,4 +12,5 @@ Then delete `latest_net_G.pth` in folder `checkpoint`, and move the model you wa
 After that, run `python finetune_no_lora.py --dataroot /path/to/train/data --name img2depthmap --model pix2pix --continue_train  --n_epochs {NUM EPOCH} --n_epochs_decay 0 --direction AtoB --lora_rank 16`
 
 # Test
-run `python test.py --dataroot /content/drive/MyDrive/cs182_final/nyu_data2 --name img2depthmap --model pix2pix --direction AtoB`
+Be sure /path/to/test/data contains folder `test`.
+Then run `python test.py --dataroot /path/to/test/data --name img2depthmap --model pix2pix --direction AtoB`.
