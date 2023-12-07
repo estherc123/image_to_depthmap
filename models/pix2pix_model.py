@@ -52,13 +52,16 @@ class Pix2PixModel(BaseModel):
             self.model_names = ['G', 'D']
         else:  # during test time, only load G
             self.model_names = ['G']
+        # lora options
+        self.use_lora = opt.lora_rank != 0
+        self.lora_rank = opt.lora_rank
         # define networks (both generator and discriminator)
         self.netG = networks.define_G(opt.input_nc, opt.output_nc, opt.ngf, opt.netG, opt.norm,
                                       not opt.no_dropout, opt.init_type, opt.init_gain, self.gpu_ids)
 
         if self.isTrain:  # define a discriminator; conditional GANs need to take both input and output images; Therefore, #channels for D is input_nc + output_nc
             self.netD = networks.define_D(opt.input_nc + opt.output_nc, opt.ndf, opt.netD,
-                                          opt.n_layers_D, opt.norm, opt.init_type, opt.init_gain, self.gpu_ids)
+                                          opt.n_layers_D, opt.norm, opt.init_type, opt.init_gain, self.gpu_ids, self.use_lora, self.lora_rank) # update to include lora
 
         if self.isTrain:
             # define loss functions
