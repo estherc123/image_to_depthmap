@@ -27,6 +27,7 @@ if __name__ == '__main__':
         visualizer.reset()              # reset the visualizer: make sure it saves the results to HTML at least once every epoch
         model.update_learning_rate()    # update learning rates in the beginning of every epoch.
 
+
         lora.mark_only_lora_as_trainable(model.netG)
         for i, data in enumerate(dataset):  # inner loop within one epoch
             iter_start_time = time.time()  # timer for computation per iteration
@@ -62,3 +63,5 @@ if __name__ == '__main__':
             model.save_networks(epoch, opt)
 
         print('End of epoch %d / %d \t Time Taken: %d sec' % (epoch, opt.n_epochs + opt.n_epochs_decay, time.time() - epoch_start_time))
+    model.eval()
+    model.save_networks('final', opt)
