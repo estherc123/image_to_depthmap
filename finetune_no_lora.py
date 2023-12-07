@@ -27,8 +27,9 @@ if __name__ == '__main__':
         visualizer.reset()              # reset the visualizer: make sure it saves the results to HTML at least once every epoch
         model.update_learning_rate()    # update learning rates in the beginning of every epoch.
 
-
-        lora.mark_only_lora_as_trainable(model.netG)
+        if opt.lora_rank:
+            lora.mark_only_lora_as_trainable(model.netG)
+            lora.mark_only_lora_as_trainable(model.netD)
         for i, data in enumerate(dataset):  # inner loop within one epoch
             iter_start_time = time.time()  # timer for computation per iteration
             if total_iters % opt.print_freq == 0:
