@@ -18,4 +18,7 @@ Then run `python test.py --dataroot /path/to/test/data --name img2depthmap --mod
 # Dataset
 
 Our training dataset: https://drive.google.com/drive/folders/1iCcPwUoqRZCvD-_wwCEQrVJgj90BaNMi?usp=drive_link
+
 Our testing/validation dataset: https://drive.google.com/drive/folders/1GMFm3mTWCqa2ynxISNVuq3aWPzU6Dku8?usp=sharing
+
+Script to prepare dataset: https://colab.research.google.com/drive/1tVjNZcUNgdBZc6EwB_TMSdSxyGvFtgni?usp=sharing
