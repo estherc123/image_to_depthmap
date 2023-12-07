@@ -12,4 +12,13 @@ Then delete `latest_net_G.pth` in folder `checkpoint`, and move the model you wa
 After that, run `python finetune_no_lora.py --dataroot /path/to/train/data --name img2depthmap --model pix2pix --continue_train  --n_epochs {NUM EPOCH} --n_epochs_decay 0 --direction AtoB --lora_rank 16`
 
 # Test
-follow testing instructions from this repo: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix.git
+Be sure /path/to/test/data contains folder `test`.
+Then run `python test.py --dataroot /path/to/test/data --name img2depthmap --model pix2pix --direction AtoB`.
+
+# Dataset
+
+Our training dataset: https://drive.google.com/drive/folders/1iCcPwUoqRZCvD-_wwCEQrVJgj90BaNMi?usp=drive_link
+
+Our testing/validation dataset: https://drive.google.com/drive/folders/1GMFm3mTWCqa2ynxISNVuq3aWPzU6Dku8?usp=sharing
+
+Script to prepare dataset: https://colab.research.google.com/drive/1tVjNZcUNgdBZc6EwB_TMSdSxyGvFtgni?usp=sharing
