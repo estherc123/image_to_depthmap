@@ -14,3 +14,8 @@ After that, run `python finetune_no_lora.py --dataroot /path/to/train/data --nam
 # Test
 Be sure /path/to/test/data contains folder `test`.
 Then run `python test.py --dataroot /path/to/test/data --name img2depthmap --model pix2pix --direction AtoB`.
+
+# Dataset
+
+Our training dataset: https://drive.google.com/drive/folders/1iCcPwUoqRZCvD-_wwCEQrVJgj90BaNMi?usp=drive_link
+Our testing/validation dataset: https://drive.google.com/drive/folders/1GMFm3mTWCqa2ynxISNVuq3aWPzU6Dku8?usp=sharing
