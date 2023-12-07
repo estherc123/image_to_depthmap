@@ -153,6 +153,8 @@ class BaseModel(ABC):
                 save_path = os.path.join(self.save_dir, save_filename)
                 net = getattr(self, 'net' + name)
 
+
+
                 if len(self.gpu_ids) > 0 and torch.cuda.is_available():
                     if not opt.lora_rank:
                         torch.save(lora.lora_state_dict(net.module.cpu()), save_path)
