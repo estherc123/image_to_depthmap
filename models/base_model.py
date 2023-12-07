@@ -154,13 +154,13 @@ class BaseModel(ABC):
                 net = getattr(self, 'net' + name)
 
                 if len(self.gpu_ids) > 0 and torch.cuda.is_available():
-                    if opt.use_lora:
+                    if !opt.lora_rank:
                         torch.save(lora.lora_state_dict(net.module.cpu()), save_path)
                     else:
                         torch.save(net.module.cpu().state_dict(), save_path)
                     net.cuda(self.gpu_ids[0])
                 else:
-                    if opt.use_lora:
+                    if !opt.lora_rank:
                         torch.save(lora.lora_state_dict(net.cpu()), save_path)
                     else:
                         torch.save(net.cpu().state_dict(), save_path)
@@ -202,7 +202,7 @@ class BaseModel(ABC):
                 # patch InstanceNorm checkpoints prior to 0.4
                 for key in list(state_dict.keys()):  # need to copy keys here because we mutate in loop
                     self.__patch_instance_norm_state_dict(state_dict, net, key.split('.'))
-                net.load_state_dict(state_dict, strct = False)
+                net.load_state_dict(state_dict, strict = False)
 
     def print_networks(self, verbose):
         """Print the total number of parameters in the network and (if verbose) network architecture
